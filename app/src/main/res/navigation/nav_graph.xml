@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.iaz.tvmazeseriesapp.HomeFragment"
+        android:name="com.iaz.tvmazeseriesapp.view.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.iaz.tvmazeseriesapp.FavoritesFragment"
+        android:name="com.iaz.tvmazeseriesapp.view.favorites.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.iaz.tvmazeseriesapp.SettingsFragment"
+        android:name="com.iaz.tvmazeseriesapp.view.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>
