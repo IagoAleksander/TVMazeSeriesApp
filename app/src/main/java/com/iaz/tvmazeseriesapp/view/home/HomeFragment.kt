@@ -9,13 +9,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenCreated
+import androidx.navigation.fragment.findNavController
 import com.iaz.tvmazeseriesapp.R
 import com.iaz.tvmazeseriesapp.databinding.FragmentHomeBinding
 import com.iaz.tvmazeseriesapp.repository.ResultState
 import com.iaz.tvmazeseriesapp.util.SearchViewTextListener
 import com.iaz.tvmazeseriesapp.util.hideSoftKeyboard
 import com.iaz.tvmazeseriesapp.view.SearchShowAdapter
-import com.iaz.tvmazeseriesapp.view.ShowPaginatedAdapter
 import com.iaz.tvmazeseriesapp.viewmodel.HomeViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -79,7 +79,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupPagingAdapter() {
-        showPaginatedAdapter = ShowPaginatedAdapter {}
+        showPaginatedAdapter = ShowPaginatedAdapter {
+            val action = HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(it.id)
+            findNavController().navigate(action)
+        }
 
         binding.rvHome.adapter = showPaginatedAdapter
         viewLifecycleOwner.lifecycleScope.launch {
@@ -93,7 +96,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupSearchAdapter() {
-        searchShowAdapter = SearchShowAdapter { }
+        searchShowAdapter = SearchShowAdapter {
+            val action = HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(it.id)
+            findNavController().navigate(action)
+        }
     }
 
     private fun setupObservers() {

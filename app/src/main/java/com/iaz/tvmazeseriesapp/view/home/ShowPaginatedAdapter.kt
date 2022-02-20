@@ -1,4 +1,4 @@
-package com.iaz.tvmazeseriesapp.view
+package com.iaz.tvmazeseriesapp.view.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

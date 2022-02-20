@@ -14,4 +14,8 @@ class ShowsRepositoryImpl(
     override suspend fun fetchShowsByName(name: String): List<Show> {
         return service.fetchShowsByName(name).map { it.toModel() }
     }
+
+    override suspend fun fetchShowDetailsById(id: Int): Show {
+        return service.fetchShowDetailsById(id).toModel()
+    }
 }

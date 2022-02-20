@@ -10,7 +10,7 @@ import androidx.paging.cachedIn
 import com.iaz.tvmazeseriesapp.repository.ResultState
 import com.iaz.tvmazeseriesapp.repository.ShowsRepository
 import com.iaz.tvmazeseriesapp.repository.model.Show
-import com.iaz.tvmazeseriesapp.view.ShowPagingSource
+import com.iaz.tvmazeseriesapp.view.home.ShowPagingSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

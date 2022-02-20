@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="show"
+            type="com.iaz.tvmazeseriesapp.repository.model.Show" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary_dark"
+        android:orientation="vertical"
+        tools:context=".view.showdetails.ShowDetailsFragment">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_show_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_light"
+            android:gravity="center"
+            android:maxLines="2"
+            android:padding="@dimen/margin_large"
+            android:text="@{show.name}"
+            android:textColor="@color/accent"
+            android:textSize="@dimen/text_large"
+            tools:text="Title" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_poster"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/poster_height"
+                    android:layout_marginTop="@dimen/margin_extra"
+                    android:adjustViewBounds="true"
+                    android:paddingBottom="@dimen/margin_large"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/poster_placeholder"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:loadImage="@{show.image.medium}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_show_genres_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_large"
+                    android:text="@string/genres"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/text_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_poster"
+                    tools:text="Genres" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_show_genres"
+                    android:layout_width="@dimen/none"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_large"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/text_medium"
+                    app:handleStringList="@{show.genres}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_show_premiere_label"
+                    app:layout_constraintTop_toBottomOf="@id/iv_poster"
+                    tools:text="Action, Drama" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_show_summary"
+                    android:layout_width="@dimen/none"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_large"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/text_medium"
+                    app:handleHtmlFormattedString="@{show.summary}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_show_genres"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_show_premiere_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_large"
+                    android:paddingBottom="@dimen/margin_large"
+                    android:text="@string/premiered_in"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/text_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_show_summary"
+                    tools:text="Premiered in:" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_show_premiere"
+                    android:layout_width="@dimen/none"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_large"
+                    android:paddingBottom="@dimen/margin_large"
+                    android:textColor="@color/accent"
+                    android:textSize="@dimen/text_medium"
+                    app:handleLoading="@{show.premiered}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_show_premiere_label"
+                    app:layout_constraintTop_toBottomOf="@id/tv_show_summary"
+                    tools:text="12/24/2009" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</layout>

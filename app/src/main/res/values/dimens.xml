@@ -4,6 +4,10 @@
     <dimen name="margin_smallest">4dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_large">16dp</dimen>
+    <dimen name="margin_extra">32dp</dimen>
     <dimen name="elevation_card">6dp</dimen>
     <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_large">24sp</dimen>
+
+    <dimen name="poster_height">200dp</dimen>
 </resources>

@@ -7,7 +7,10 @@ import kotlinx.parcelize.Parcelize
 data class Show(
     val id: Int,
     val name: String,
-    val image: Image
+    val image: Image,
+    val premiered: String?,
+    val genres: List<String>?,
+    val summary: String?,
 ) : Parcelable
 
 @Parcelize

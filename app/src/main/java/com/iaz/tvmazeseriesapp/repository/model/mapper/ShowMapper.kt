@@ -10,7 +10,10 @@ fun ShowDto.toModel(): Show {
     return Show(
         this.id,
         this.name,
-        this.image.toModel()
+        this.image.toModel(),
+        this.premiered,
+        this.genres,
+        this.summary
     )
 }
 

@@ -1,4 +1,4 @@
-package com.iaz.tvmazeseriesapp.view
+package com.iaz.tvmazeseriesapp.view.home
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
