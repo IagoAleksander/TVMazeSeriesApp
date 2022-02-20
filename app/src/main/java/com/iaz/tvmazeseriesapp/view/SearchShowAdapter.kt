@@ -2,33 +2,37 @@ package com.iaz.tvmazeseriesapp.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.iaz.tvmazeseriesapp.databinding.ItemShowBinding
 import com.iaz.tvmazeseriesapp.repository.model.Show
 
-class ShowAdapter(private val onItemClick: ((Show) -> Unit)) :
-    PagingDataAdapter<Show, ShowAdapter.ViewHolder>(DiffCallback) {
+class SearchShowAdapter(
+    private val onItemClick: ((Show) -> Unit)
+) :
+    ListAdapter<Show, SearchShowAdapter.ShowViewHolder>(DiffCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemShowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding, onItemClick)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowViewHolder {
+        val binding =
+            ItemShowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ShowViewHolder(binding, onItemClick)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ShowViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(
+    class ShowViewHolder(
         private val binding: ItemShowBinding,
         private val onItemClick: (Show) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(show: Show?) {
-            show?.let {
-                binding.show = show
-                itemView.setOnClickListener { onItemClick(show) }
+        fun bind(show: Show) {
+            binding.show = show
+
+            this.itemView.setOnClickListener {
+                onItemClick(show)
             }
         }
     }
@@ -43,3 +47,4 @@ class ShowAdapter(private val onItemClick: ((Show) -> Unit)) :
         }
     }
 }
+

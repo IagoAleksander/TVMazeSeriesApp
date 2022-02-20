@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primary_light">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/sv_home"
+            android:layout_width="@dimen/none"
+            android:layout_height="50dp"
+            android:imeOptions="actionSearch"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryHint="Search Here" />
+
+        <RadioGroup
+            android:layout_width="@dimen/none"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sv_home">
+
+            <RadioButton
+                android:id="@+id/radio_pirates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:buttonTint="@color/accent"
+                android:checked="true"
+                android:text="@string/shows"
+                android:textColor="@color/accent" />
+
+            <RadioButton
+                android:id="@+id/radio_ninjas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:buttonTint="@color/accent"
+                android:text="@string/people"
+                android:textColor="@color/accent" />
+        </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

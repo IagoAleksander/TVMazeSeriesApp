@@ -3,9 +3,8 @@ package com.iaz.tvmazeseriesapp.view
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.bumptech.glide.load.HttpException
-import com.iaz.tvmazeseriesapp.repository.service.FetchShowsService
+import com.iaz.tvmazeseriesapp.repository.ShowsRepository
 import com.iaz.tvmazeseriesapp.repository.model.Show
-import com.iaz.tvmazeseriesapp.repository.model.mapper.toModel
 import java.io.IOException
 
 /**
@@ -15,8 +14,8 @@ import java.io.IOException
  *
  * Note that the key type is Int, since we're using page number to load a page.
  */
-class ShowPagingAdapter(
-    private val service: FetchShowsService
+class ShowPagingSource(
+    private val repository: ShowsRepository
 ) : PagingSource<Int, Show>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Show> {
 
@@ -31,7 +30,7 @@ class ShowPagingAdapter(
             // Suspending network load via Retrofit. This doesn't need to be wrapped in a
             // withContext(Dispatcher.IO) { ... } block since Retrofit's Coroutine
             // CallAdapter dispatches on a worker thread.
-            val response = service.fetchShows(pageNumber).map { it.toModel() }
+            val response = repository.fetchShows(pageNumber)
 
             // Since 0 is the lowest page number, return null to signify no more pages should
             // be loaded before it.
