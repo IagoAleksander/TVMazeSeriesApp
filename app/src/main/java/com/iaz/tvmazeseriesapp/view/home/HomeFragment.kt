@@ -15,7 +15,7 @@ import com.iaz.tvmazeseriesapp.databinding.FragmentHomeBinding
 import com.iaz.tvmazeseriesapp.repository.ResultState
 import com.iaz.tvmazeseriesapp.util.SearchViewTextListener
 import com.iaz.tvmazeseriesapp.util.hideSoftKeyboard
-import com.iaz.tvmazeseriesapp.view.SearchShowAdapter
+import com.iaz.tvmazeseriesapp.view.ShowAdapter
 import com.iaz.tvmazeseriesapp.viewmodel.HomeViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var showPaginatedAdapter: ShowPaginatedAdapter
-    private lateinit var searchShowAdapter: SearchShowAdapter
+    private lateinit var showAdapter: ShowAdapter
 
     private val homeViewModel: HomeViewModel by viewModel()
 
@@ -96,7 +96,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupSearchAdapter() {
-        searchShowAdapter = SearchShowAdapter {
+        showAdapter = ShowAdapter {
             val action = HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(it.id)
             findNavController().navigate(action)
         }
@@ -109,8 +109,8 @@ class HomeFragment : Fragment() {
                     //TODO add empty state
                 }
                 is ResultState.Loaded -> {
-                    binding.rvHome.adapter = searchShowAdapter
-                    searchShowAdapter.submitList(result.data)
+                    binding.rvHome.adapter = showAdapter
+                    showAdapter.submitList(result.data)
                 }
                 else -> {}
             }

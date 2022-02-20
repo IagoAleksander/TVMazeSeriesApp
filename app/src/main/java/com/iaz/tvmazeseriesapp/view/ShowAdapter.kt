@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iaz.tvmazeseriesapp.databinding.ItemShowBinding
 import com.iaz.tvmazeseriesapp.repository.model.Show
 
-class SearchShowAdapter(
+class ShowAdapter(
     private val onItemClick: ((Show) -> Unit)
 ) :
-    ListAdapter<Show, SearchShowAdapter.ShowViewHolder>(DiffCallback) {
+    ListAdapter<Show, ShowAdapter.ShowViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowViewHolder {
         val binding =

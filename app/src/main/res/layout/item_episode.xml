@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="show"
-            type="com.iaz.tvmazeseriesapp.repository.model.Show" />
+            name="episode"
+            type="com.iaz.tvmazeseriesapp.repository.model.Episode" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -30,30 +30,29 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_poster"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/horizontal_poster_width"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/poster_placeholder_horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:loadImage="@{show.image.medium}"
-                android:src="@drawable/poster_placeholder"/>
+                app:loadHorizontalImage="@{episode.image.medium}" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tv_episode_number_and_name"
                 android:layout_width="@dimen/none"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:maxLines="1"
-                android:padding="@dimen/margin_small"
-                android:text="@{show.name}"
+                android:layout_margin="@dimen/margin_large"
+                android:maxLines="2"
+                android:text="@{episode.number + `. ` + episode.name}"
                 android:textColor="@color/accent"
                 android:textSize="@dimen/text_medium"
+                app:layout_constraintBottom_toBottomOf="@id/iv_poster"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_poster"
-                tools:text="Spider Man" />
+                app:layout_constraintStart_toEndOf="@+id/iv_poster"
+                app:layout_constraintTop_toTopOf="@id/iv_poster"
+                tools:text="1. The Calm" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

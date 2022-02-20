@@ -10,4 +10,5 @@
     <dimen name="text_large">24sp</dimen>
 
     <dimen name="poster_height">200dp</dimen>
+    <dimen name="horizontal_poster_width">140dp</dimen>
 </resources>

@@ -1,8 +1,12 @@
 package com.iaz.tvmazeseriesapp.repository.model.mapper
 
+import com.iaz.tvmazeseriesapp.repository.model.Episode
 import com.iaz.tvmazeseriesapp.repository.model.Image
+import com.iaz.tvmazeseriesapp.repository.model.Season
 import com.iaz.tvmazeseriesapp.repository.model.Show
+import com.iaz.tvmazeseriesapp.repository.model.response.EpisodeDto
 import com.iaz.tvmazeseriesapp.repository.model.response.ImageDto
+import com.iaz.tvmazeseriesapp.repository.model.response.SeasonDto
 import com.iaz.tvmazeseriesapp.repository.model.response.ShowDto
 import com.iaz.tvmazeseriesapp.repository.model.response.ShowSearchDto
 
@@ -26,4 +30,22 @@ fun ImageDto?.toModel(): Image {
 
 fun ShowSearchDto.toModel(): Show {
     return this.show.toModel()
+}
+
+fun SeasonDto.toModel(): Season {
+    return Season(
+        this.id,
+        this.number,
+        this.name,
+    )
+}
+
+fun EpisodeDto.toModel(): Episode {
+    return Episode(
+        this.id,
+        this.name,
+        this.number,
+        this.image.toModel(),
+        this.summary
+    )
 }

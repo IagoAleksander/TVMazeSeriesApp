@@ -30,7 +30,7 @@
             android:textSize="@dimen/text_large"
             tools:text="Title" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -61,8 +61,7 @@
                     android:textColor="@color/accent"
                     android:textSize="@dimen/text_medium"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_poster"
-                    tools:text="Genres" />
+                    app:layout_constraintTop_toBottomOf="@id/iv_poster" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_show_genres"
@@ -100,8 +99,7 @@
                     android:textColor="@color/accent"
                     android:textSize="@dimen/text_medium"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_show_summary"
-                    tools:text="Premiered in:" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_show_summary" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_show_premiere"
@@ -117,8 +115,20 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_show_summary"
                     tools:text="12/24/2009" />
 
+                <include
+                    android:id="@+id/layout_episodes"
+                    layout="@layout/fragment_episodes_list"
+                    android:layout_width="@dimen/none"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_show_premiere"
+                    tools:visibility="visible" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
 </layout>

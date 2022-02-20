@@ -1,11 +1,10 @@
 package com.iaz.tvmazeseriesapp.repository.model.response
 
-data class ShowDto(
+data class EpisodeDto(
     val id: Int,
-    val image: ImageDto?,
     val name: String,
-    val premiered: String?,
-    val genres: List<String>?,
+    val number: Int,
+    val image: ImageDto?,
     val summary: String?,
 )
 

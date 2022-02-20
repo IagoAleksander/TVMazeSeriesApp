@@ -15,6 +15,14 @@ fun bindLoadImage(view: AppCompatImageView, url: String?) {
     }
 }
 
+@BindingAdapter("loadHorizontalImage")
+fun bindLoadHorizontalImage(view: AppCompatImageView, url: String?) {
+    url?.let {
+        Glide.with(view.context).load(url).placeholder(R.drawable.poster_placeholder_horizontal).override(SIZE_ORIGINAL)
+            .into(view)
+    }
+}
+
 @BindingAdapter("handleStringList")
 fun TextView.handleStringList(list: List<String>?) {
     text = list?.let {
