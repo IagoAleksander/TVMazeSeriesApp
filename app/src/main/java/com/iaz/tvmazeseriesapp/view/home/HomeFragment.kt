@@ -15,7 +15,7 @@ import com.iaz.tvmazeseriesapp.databinding.FragmentHomeBinding
 import com.iaz.tvmazeseriesapp.repository.ResultState
 import com.iaz.tvmazeseriesapp.util.SearchViewTextListener
 import com.iaz.tvmazeseriesapp.util.hideSoftKeyboard
-import com.iaz.tvmazeseriesapp.view.ShowAdapter
+import com.iaz.tvmazeseriesapp.view.GridAdapter
 import com.iaz.tvmazeseriesapp.viewmodel.HomeViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -24,12 +24,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
     private val searchViewTextListener: SearchViewTextListener = SearchViewTextListener(
         onSubmit = { hideSoftKeyboard() },
-        callback = { term -> homeViewModel.fetchShows(term) }
+        callback = { term -> fetchData(term) }
     )
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var showPaginatedAdapter: ShowPaginatedAdapter
-    private lateinit var showAdapter: ShowAdapter
+    private lateinit var gridAdapter: GridAdapter
 
     private val homeViewModel: HomeViewModel by viewModel()
 
@@ -76,6 +76,10 @@ class HomeFragment : Fragment() {
 
     private fun initializeListeners() {
         binding.svLayout.svHome.setOnQueryTextListener(searchViewTextListener)
+
+        binding.svLayout.rgSearch.setOnCheckedChangeListener { _, _ ->
+            fetchData(binding.svLayout.svHome.query.toString())
+        }
     }
 
     private fun setupPagingAdapter() {
@@ -88,7 +92,7 @@ class HomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             whenCreated {
                 homeViewModel.flowShows.collectLatest { pagingData ->
-                    //TODO add empty state
+                    //TODO check empty state
                     showPaginatedAdapter.submitData(pagingData)
                 }
             }
@@ -96,9 +100,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupSearchAdapter() {
-        showAdapter = ShowAdapter {
-            val action = HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(it.id)
-            findNavController().navigate(action)
+        gridAdapter = GridAdapter {
+            if (binding.svLayout.rdShows.isChecked) {
+                val action = HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(it.id)
+                findNavController().navigate(action)
+            }
         }
     }
 
@@ -109,11 +115,31 @@ class HomeFragment : Fragment() {
                     //TODO add empty state
                 }
                 is ResultState.Loaded -> {
-                    binding.rvHome.adapter = showAdapter
-                    showAdapter.submitList(result.data)
+                    binding.rvHome.adapter = gridAdapter
+                    gridAdapter.submitList(result.data)
                 }
                 else -> {}
             }
+        }
+        homeViewModel.resultStatePeople.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                ResultState.Empty -> {
+                    //TODO add empty state
+                }
+                is ResultState.Loaded -> {
+                    binding.rvHome.adapter = gridAdapter
+                    gridAdapter.submitList(result.data)
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun fetchData(term: String) {
+        if (binding.svLayout.rdShows.isChecked) {
+            homeViewModel.fetchShows(term)
+        } else {
+            homeViewModel.fetchPeople(term)
         }
     }
 }

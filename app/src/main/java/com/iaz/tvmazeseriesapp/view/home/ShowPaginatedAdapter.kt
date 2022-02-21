@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.iaz.tvmazeseriesapp.databinding.ItemShowBinding
+import com.iaz.tvmazeseriesapp.databinding.ItemGridBinding
 import com.iaz.tvmazeseriesapp.repository.model.Show
 
 class ShowPaginatedAdapter(private val onItemClick: ((Show) -> Unit)) :
     PagingDataAdapter<Show, ShowPaginatedAdapter.ShowViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowViewHolder {
-        val binding = ItemShowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemGridBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ShowViewHolder(binding, onItemClick)
     }
 
@@ -21,13 +21,13 @@ class ShowPaginatedAdapter(private val onItemClick: ((Show) -> Unit)) :
     }
 
     class ShowViewHolder(
-        private val binding: ItemShowBinding,
+        private val binding: ItemGridBinding,
         private val onItemClick: (Show) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(show: Show?) {
             show?.let {
-                binding.show = show
+                binding.item = show
                 itemView.setOnClickListener { onItemClick(show) }
             }
         }

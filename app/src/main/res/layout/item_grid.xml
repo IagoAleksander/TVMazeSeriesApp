@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="show"
-            type="com.iaz.tvmazeseriesapp.repository.model.Show" />
+            name="item"
+            type="com.iaz.tvmazeseriesapp.repository.model.GridItem" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -37,7 +37,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:loadImage="@{show.image.medium}"
+                app:loadImage="@{item.image.medium}"
                 android:src="@drawable/poster_placeholder"/>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -47,7 +47,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:padding="@dimen/margin_small"
-                android:text="@{show.name}"
+                android:text="@{item.name}"
                 android:textColor="@color/accent"
                 android:textSize="@dimen/text_medium"
                 app:layout_constraintEnd_toEndOf="parent"
