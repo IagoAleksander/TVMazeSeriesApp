@@ -42,7 +42,11 @@ fun TextView.handleStringList(list: List<String>?) {
 @BindingAdapter("handleHtmlFormattedString")
 fun TextView.handleHtmlFormattedString(htmlString: String?) {
     text = htmlString?.let {
-        HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString().trim()
+        if (htmlString.isEmpty()) {
+            "No information available"
+        } else {
+            HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString().trim()
+        }
     } ?: "No information available"
 }
 

@@ -32,5 +32,20 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_showDetailsFragment_to_episodeDetailsFragment"
+            app:destination="@id/episodeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/episodeDetailsFragment"
+        android:name="com.iaz.tvmazeseriesapp.view.episodedetails.EpisodeDetailsFragment"
+        android:label="fragment_episode_details"
+        tools:layout="@layout/fragment_episode_details" >
+        <argument
+            android:name="episode"
+            app:argType="com.iaz.tvmazeseriesapp.repository.model.Episode" />
+        <argument
+            android:name="showName"
+            app:argType="string" />
     </fragment>
 </navigation>

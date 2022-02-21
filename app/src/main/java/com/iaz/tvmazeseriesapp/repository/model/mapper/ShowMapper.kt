@@ -45,6 +45,7 @@ fun EpisodeDto.toModel(): Episode {
         this.id,
         this.name,
         this.number,
+        this.season,
         this.image.toModel(),
         this.summary
     )

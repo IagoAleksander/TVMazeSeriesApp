@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.2015" />
         <entry key="app/src/main/res/drawable/ic_settings.xml" value="0.2745" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31567028985507245" />
+        <entry key="app/src/main/res/layout/fragment_episode_details.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fragment_episodes_list.xml" value="0.37083333333333335" />
         <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.31567028985507245" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.31567028985507245" />

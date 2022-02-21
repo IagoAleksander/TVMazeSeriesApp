@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.iaz.tvmazeseriesapp.R
 import com.iaz.tvmazeseriesapp.databinding.FragmentShowDetailsBinding
@@ -19,6 +20,7 @@ class ShowDetailsFragment : Fragment() {
     private val args: ShowDetailsFragmentArgs by navArgs()
     private lateinit var binding: FragmentShowDetailsBinding
     private lateinit var episodeAdapter: EpisodeAdapter
+    private lateinit var showName: String
 
     private val showDetailsViewModel: ShowDetailsViewModel by viewModel() {
         parametersOf(
@@ -42,6 +44,7 @@ class ShowDetailsFragment : Fragment() {
     private fun initializeObservers() {
         showDetailsViewModel.show.observe(viewLifecycleOwner) { show ->
             binding.show = show
+            showName = show.name
         }
         showDetailsViewModel.episodes.observe(viewLifecycleOwner) { episodes ->
             binding.layoutEpisodes.rvEpisodes.adapter = episodeAdapter
@@ -79,6 +82,8 @@ class ShowDetailsFragment : Fragment() {
 
     private fun setupEpisodesAdapter() {
         episodeAdapter = EpisodeAdapter {
+            val action = ShowDetailsFragmentDirections.actionShowDetailsFragmentToEpisodeDetailsFragment(it, showName)
+            findNavController().navigate(action)
         }
     }
 }
