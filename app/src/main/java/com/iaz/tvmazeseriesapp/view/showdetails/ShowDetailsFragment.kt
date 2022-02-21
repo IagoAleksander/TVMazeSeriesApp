@@ -7,9 +7,11 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.iaz.tvmazeseriesapp.CustomApplication.Companion.prefs
 import com.iaz.tvmazeseriesapp.R
 import com.iaz.tvmazeseriesapp.databinding.FragmentShowDetailsBinding
 import com.iaz.tvmazeseriesapp.viewmodel.ShowDetailsViewModel
@@ -24,7 +26,8 @@ class ShowDetailsFragment : Fragment() {
 
     private val showDetailsViewModel: ShowDetailsViewModel by viewModel() {
         parametersOf(
-            args.id
+            args.id,
+            args.show
         )
     }
 
@@ -34,11 +37,36 @@ class ShowDetailsFragment : Fragment() {
     ): View {
         binding = FragmentShowDetailsBinding.inflate(LayoutInflater.from(context), container, false)
 
+        setupFavoriteButton()
         initializeObservers()
         setupDropdown()
         setupEpisodesAdapter()
 
         return binding.root
+    }
+
+    private fun setupFavoriteButton() {
+        prefs?.sharedPreferenceStringLiveData?.observe(viewLifecycleOwner) { favoritedShowsSet ->
+            val isFavorite = favoritedShowsSet.contains(args.id.toString())
+            if (isFavorite) {
+                binding.button.text = getString(R.string.remove_from_favorites)
+                binding.button.icon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_favorite_border) }
+            } else {
+                binding.button.text = getString(R.string.add_to_favorites)
+                binding.button.icon = context?.let { ContextCompat.getDrawable(it, R.drawable.ic_favorite) }
+            }
+            binding.button.isChecked = isFavorite
+        }
+
+        binding.button.setOnClickListener {
+            val isFavorite = prefs?.favoritesPref?.contains(args.id.toString())
+            if (isFavorite == true) {
+                prefs?.favoritesPref = prefs?.favoritesPref?.minus(args.id.toString()) ?: setOf()
+            } else {
+                prefs?.favoritesPref = prefs?.favoritesPref?.plus(args.id.toString()) ?: setOf()
+            }
+
+        }
     }
 
     private fun initializeObservers() {

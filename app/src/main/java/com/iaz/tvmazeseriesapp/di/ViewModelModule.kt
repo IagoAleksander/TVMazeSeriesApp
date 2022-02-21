@@ -1,5 +1,7 @@
 package com.iaz.tvmazeseriesapp.di
 
+import com.iaz.tvmazeseriesapp.repository.model.Show
+import com.iaz.tvmazeseriesapp.viewmodel.FavoritesViewModel
 import com.iaz.tvmazeseriesapp.viewmodel.HomeViewModel
 import com.iaz.tvmazeseriesapp.viewmodel.PersonDetailsViewModel
 import com.iaz.tvmazeseriesapp.viewmodel.ShowDetailsViewModel
@@ -12,11 +14,15 @@ val viewModelModule = module {
         HomeViewModel(get(), get())
     }
 
-    viewModel { (id: Int) ->
-        ShowDetailsViewModel(id, get())
+    viewModel { (id: Int, show: Show?) ->
+        ShowDetailsViewModel(id, show, get())
     }
 
     viewModel { (id: Int) ->
         PersonDetailsViewModel(id, get())
+    }
+
+    viewModel { (ids: List<String>) ->
+        FavoritesViewModel(ids, get())
     }
 }

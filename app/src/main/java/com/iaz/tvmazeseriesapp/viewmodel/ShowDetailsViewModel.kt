@@ -14,6 +14,7 @@ import kotlinx.coroutines.withContext
 
 class ShowDetailsViewModel(
     id: Int,
+    show: Show?,
     private val repository: ShowsRepository
 ) : ViewModel() {
 
@@ -33,8 +34,12 @@ class ShowDetailsViewModel(
     init {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                repository.fetchShowDetailsById(id).let { result ->
-                    mutableShow.postValue(result)
+                if (show == null) {
+                    repository.fetchShowDetailsById(id).let { result ->
+                        mutableShow.postValue(result)
+                    }
+                } else {
+                    show.let { mutableShow.postValue(it) }
                 }
                 repository.fetchSeasonsByShowId(id).let { result ->
                     mutableSeasons.postValue(result)

@@ -39,7 +39,7 @@ class PersonDetailsFragment : Fragment() {
 
     private fun setupShowBasicAdapter() {
         showBasicAdapter = ShowBasicAdapter {
-            val action = PersonDetailsFragmentDirections.actionPersonDetailsFragmentToShowDetailsFragment(it.id)
+            val action = PersonDetailsFragmentDirections.actionPersonDetailsFragmentToShowDetailsFragment(it.id, null)
             findNavController().navigate(action)
         }
         binding.rvShows.adapter = showBasicAdapter

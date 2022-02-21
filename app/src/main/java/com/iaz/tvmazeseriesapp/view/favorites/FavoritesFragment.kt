@@ -5,56 +5,51 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.iaz.tvmazeseriesapp.R
+import androidx.navigation.fragment.findNavController
+import com.iaz.tvmazeseriesapp.CustomApplication.Companion.prefs
+import com.iaz.tvmazeseriesapp.databinding.FragmentFavoritesBinding
+import com.iaz.tvmazeseriesapp.repository.model.Show
+import com.iaz.tvmazeseriesapp.view.GridAdapter
+import com.iaz.tvmazeseriesapp.viewmodel.FavoritesViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FavoritesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FavoritesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentFavoritesBinding
+    private lateinit var gridAdapter: GridAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val favoritesViewModel: FavoritesViewModel by viewModel() {
+        parametersOf(
+            prefs?.favoritesPref?.toList()
+        )
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false)
+    ): View {
+        binding = FragmentFavoritesBinding.inflate(layoutInflater)
+
+        setupAdapter()
+        setupObservers()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FavoritesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FavoritesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun setupAdapter() {
+        gridAdapter = GridAdapter {
+            val action = FavoritesFragmentDirections.actionFavoritesFragmentToShowDetailsFragment(it.id, it as Show)
+            findNavController().navigate(action)
+        }
+        binding.rvFavorite.adapter = gridAdapter
+    }
+
+    private fun setupObservers() {
+        favoritesViewModel.shows.observe(viewLifecycleOwner) { shows ->
+            gridAdapter.submitList(shows)
+        }
+        prefs?.sharedPreferenceStringLiveData?.observe(viewLifecycleOwner) { favoritedShowsSet ->
+            favoritesViewModel.fetchFavorites(favoritedShowsSet.toList())
+        }
     }
 }

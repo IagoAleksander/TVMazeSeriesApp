@@ -14,6 +14,7 @@ import com.iaz.tvmazeseriesapp.R
 import com.iaz.tvmazeseriesapp.databinding.FragmentHomeBinding
 import com.iaz.tvmazeseriesapp.repository.ResultState
 import com.iaz.tvmazeseriesapp.repository.model.Person
+import com.iaz.tvmazeseriesapp.repository.model.Show
 import com.iaz.tvmazeseriesapp.util.SearchViewTextListener
 import com.iaz.tvmazeseriesapp.util.hideSoftKeyboard
 import com.iaz.tvmazeseriesapp.view.GridAdapter
@@ -85,7 +86,7 @@ class HomeFragment : Fragment() {
 
     private fun setupPagingAdapter() {
         showPaginatedAdapter = ShowPaginatedAdapter {
-            val action = HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(it.id)
+            val action = HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(it.id, it)
             findNavController().navigate(action)
         }
 
@@ -103,7 +104,7 @@ class HomeFragment : Fragment() {
     private fun setupSearchAdapter() {
         gridAdapter = GridAdapter {
             val action = if (binding.svLayout.rdShows.isChecked) {
-                HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(it.id)
+                HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(it.id, it as Show)
             } else {
                 HomeFragmentDirections.actionHomeFragmentToPersonDetailsFragment(it as Person)
             }
