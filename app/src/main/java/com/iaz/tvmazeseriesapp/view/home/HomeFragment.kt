@@ -26,7 +26,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
     private val searchViewTextListener: SearchViewTextListener = SearchViewTextListener(
         onSubmit = { hideSoftKeyboard() },
-        callback = { term -> fetchData(term) }
+        callback = { term -> fetchData(term) },
+        considerBlank = false
     )
 
     private lateinit var binding: FragmentHomeBinding

@@ -6,7 +6,8 @@ import java.util.TimerTask
 
 class SearchViewTextListener(
     private val callback: (term: String) -> Unit,
-    private val onSubmit: () -> Unit
+    private val onSubmit: () -> Unit,
+    private val considerBlank: Boolean
 ) : SearchView.OnQueryTextListener {
 
     private var timer: Timer? = null
@@ -27,7 +28,7 @@ class SearchViewTextListener(
                 this.schedule(
                     object : TimerTask() {
                         override fun run() {
-                            if (text.isNotBlank()) callback(text.toString())
+                            if (text.isNotBlank() || considerBlank) callback(text.toString())
                         }
                     },
                     SEARCH_DEBOUNCE_TIME_IN_MILLIS

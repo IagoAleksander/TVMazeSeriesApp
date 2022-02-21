@@ -5,45 +5,45 @@
     android:layout_height="wrap_content"
     android:background="@color/primary_light">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/sv_home"
-            android:layout_width="@dimen/none"
-            android:layout_height="50dp"
-            android:imeOptions="actionSearch"
-            app:iconifiedByDefault="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:queryHint="Search Here" />
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/sv_home"
+        android:layout_width="@dimen/none"
+        android:layout_height="50dp"
+        android:imeOptions="actionSearch"
+        app:iconifiedByDefault="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="@string/search_here" />
 
-        <RadioGroup
-            android:id="@+id/rg_search"
-            android:layout_width="@dimen/none"
+    <RadioGroup
+        android:id="@+id/rg_search"
+        android:layout_width="@dimen/none"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sv_home">
+
+        <RadioButton
+            android:id="@+id/rd_shows"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sv_home">
+            android:layout_marginEnd="@dimen/margin_large"
+            android:buttonTint="@color/accent"
+            android:checked="true"
+            android:text="@string/shows"
+            android:textColor="@color/accent" />
 
-            <RadioButton
-                android:id="@+id/rd_shows"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_large"
-                android:buttonTint="@color/accent"
-                android:checked="true"
-                android:text="@string/shows"
-                android:textColor="@color/accent" />
-
-            <RadioButton
-                android:id="@+id/rd_people"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_large"
-                android:buttonTint="@color/accent"
-                android:text="@string/people"
-                android:textColor="@color/accent" />
-        </RadioGroup>
+        <RadioButton
+            android:id="@+id/rd_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:buttonTint="@color/accent"
+            android:text="@string/people"
+            android:textColor="@color/accent" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,18 @@
     android:background="@color/primary_dark"
     tools:context=".view.favorites.FavoritesFragment">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/sv_favorites"
+        android:layout_width="@dimen/none"
+        android:layout_height="50dp"
+        android:background="@color/primary_light"
+        android:imeOptions="actionSearch"
+        app:iconifiedByDefault="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="@string/filter_here" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_favorite"
         android:layout_width="@dimen/none"
@@ -18,7 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sv_favorites"
         app:spanCount="2"
         tools:listitem="@layout/item_grid" />
 
