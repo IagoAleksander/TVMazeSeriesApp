@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="show"
-            type="com.iaz.tvmazeseriesapp.repository.model.Show" />
+            name="person"
+            type="com.iaz.tvmazeseriesapp.repository.model.Person" />
     </data>
 
     <LinearLayout
@@ -15,22 +15,22 @@
         android:layout_height="match_parent"
         android:background="@color/primary_dark"
         android:orientation="vertical"
-        tools:context=".view.showdetails.ShowDetailsFragment">
+        tools:context=".view.persondetails.PersonDetailsFragment">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_show_title"
+            android:id="@+id/tv_person_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/primary_light"
             android:gravity="center"
             android:maxLines="2"
             android:padding="@dimen/margin_large"
-            android:text="@{show.name}"
+            android:text="@{person.name}"
             android:textColor="@color/accent"
             android:textSize="@dimen/text_large"
             tools:text="Title" />
 
-        <androidx.core.widget.NestedScrollView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -50,109 +50,86 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:loadImage="@{show.image.medium}" />
+                    app:loadImage="@{person.image.medium}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_show_genres_label"
+                    android:id="@+id/tv_person_gender_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_large"
-                    android:text="@string/genres"
+                    android:text="@string/gender"
                     android:textColor="@color/accent"
                     android:textSize="@dimen/text_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_poster" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_show_genres"
-                    android:layout_width="@dimen/none"
+                    android:id="@+id/tv_person_gender"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_large"
                     android:textColor="@color/accent"
                     android:textSize="@dimen/text_medium"
-                    app:handleStringList="@{show.genres}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tv_show_genres_label"
+                    app:handleLoading="@{person.gender}"
+                    app:layout_constraintStart_toEndOf="@+id/tv_person_country_label"
                     app:layout_constraintTop_toBottomOf="@id/iv_poster"
-                    tools:text="Action, Drama" />
+                    tools:text="Male" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_show_summary"
-                    android:layout_width="@dimen/none"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_large"
-                    android:textColor="@color/accent"
-                    android:textSize="@dimen/text_medium"
-                    app:handleHtmlFormattedString="@{show.summary}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_show_genres"
-                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_show_aires_label"
+                    android:id="@+id/tv_person_country_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_large"
-                    android:text="@string/on_air"
+                    android:text="@string/country"
                     android:textColor="@color/accent"
                     android:textSize="@dimen/text_medium"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_show_summary" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_person_gender" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_show_aires"
-                    android:layout_width="@dimen/none"
+                    android:id="@+id/tv_person_country"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_large"
                     android:textColor="@color/accent"
                     android:textSize="@dimen/text_medium"
-                    app:handleStringList="@{show.schedule.days}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tv_show_genres_label"
-                    app:layout_constraintTop_toBottomOf="@id/tv_show_summary"
-                    tools:text="Thursday, Friday" />
+                    app:handleLoading="@{person.country.name}"
+                    app:layout_constraintStart_toEndOf="@+id/tv_person_country_label"
+                    app:layout_constraintTop_toBottomOf="@id/tv_person_gender"
+                    tools:text="United States" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_show_aires_at_label"
+                    android:id="@+id/tv_show_participated_in_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_large"
-                    android:paddingBottom="@dimen/margin_large"
-                    android:text="@string/at"
+                    android:layout_margin="@dimen/margin_large"
+                    android:text="@string/participated_in"
                     android:textColor="@color/accent"
                     android:textSize="@dimen/text_medium"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_show_aires" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_person_country"
+                    tools:visibility="visible" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_show_aires_at"
-                    android:layout_width="@dimen/none"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_large"
-                    android:paddingBottom="@dimen/margin_large"
-                    android:textColor="@color/accent"
-                    android:textSize="@dimen/text_medium"
-                    app:handleLoading="@{show.schedule.time}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tv_show_genres_label"
-                    app:layout_constraintTop_toBottomOf="@id/tv_show_aires"
-                    tools:text="11:00" />
-
-                <include
-                    android:id="@+id/layout_episodes"
-                    layout="@layout/fragment_episodes_list"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_shows"
                     android:layout_width="@dimen/none"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small"
-                    android:visibility="gone"
+                    android:layout_marginBottom="@dimen/margin_large"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:padding="@dimen/margin_smallest"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_show_aires_at"
-                    tools:visibility="visible" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_show_participated_in_label"
+                    tools:listitem="@layout/item_show_basic" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+        </ScrollView>
     </LinearLayout>
 
 </layout>

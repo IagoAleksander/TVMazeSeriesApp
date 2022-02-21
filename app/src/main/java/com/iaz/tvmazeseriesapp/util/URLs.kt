@@ -7,5 +7,7 @@ class URLs {
         const val GET_SEASONS = ("seasons")
         const val GET_EPISODES = ("episodes")
         const val SEARCH_PEOPLE = ("search/people")
+        const val GET_PEOPLE = ("people")
+        const val GET_CAST_CREDITS = ("castcredits")
     }
 }

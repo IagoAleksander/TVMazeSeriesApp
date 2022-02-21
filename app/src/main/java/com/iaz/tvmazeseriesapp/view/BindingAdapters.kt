@@ -27,30 +27,29 @@ fun bindLoadHorizontalImage(view: AppCompatImageView, url: String?) {
 fun TextView.handleStringList(list: List<String>?) {
     text = list?.let {
         if (it.isEmpty()) {
-            "No information available"
+            context.getString(R.string.no_information_available)
         } else {
-            var listString = ""
-            for (genre in list.subList(0, list.size - 1)) {
-                listString += "$genre, "
-            }
-            listString += list[list.size - 1]
-            listString
+            list.joinToString(", ")
         }
-    } ?: "No information available"
+    } ?: context.getString(R.string.no_information_available)
 }
 
 @BindingAdapter("handleHtmlFormattedString")
 fun TextView.handleHtmlFormattedString(htmlString: String?) {
     text = htmlString?.let {
         if (htmlString.isEmpty()) {
-            "No information available"
+            context.getString(R.string.no_information_available)
         } else {
             HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_LEGACY).toString().trim()
         }
-    } ?: "No information available"
+    } ?: context.getString(R.string.no_information_available)
 }
 
 @BindingAdapter("handleLoading")
 fun TextView.handleLoading(info: String?) {
-    text = info ?: "No information available"
+    if (info.isNullOrBlank()) {
+        text = context.getString(R.string.no_information_available)
+    } else {
+        text = info
+    }
 }

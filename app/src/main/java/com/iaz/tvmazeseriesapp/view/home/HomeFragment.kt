@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.iaz.tvmazeseriesapp.R
 import com.iaz.tvmazeseriesapp.databinding.FragmentHomeBinding
 import com.iaz.tvmazeseriesapp.repository.ResultState
+import com.iaz.tvmazeseriesapp.repository.model.Person
 import com.iaz.tvmazeseriesapp.util.SearchViewTextListener
 import com.iaz.tvmazeseriesapp.util.hideSoftKeyboard
 import com.iaz.tvmazeseriesapp.view.GridAdapter
@@ -101,10 +102,12 @@ class HomeFragment : Fragment() {
 
     private fun setupSearchAdapter() {
         gridAdapter = GridAdapter {
-            if (binding.svLayout.rdShows.isChecked) {
-                val action = HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(it.id)
-                findNavController().navigate(action)
+            val action = if (binding.svLayout.rdShows.isChecked) {
+                HomeFragmentDirections.actionHomeFragmentToShowDetailsFragment(it.id)
+            } else {
+                HomeFragmentDirections.actionHomeFragmentToPersonDetailsFragment(it as Person)
             }
+            findNavController().navigate(action)
         }
     }
 

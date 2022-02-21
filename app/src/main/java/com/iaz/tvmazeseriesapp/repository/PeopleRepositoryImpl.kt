@@ -8,4 +8,7 @@ class PeopleRepositoryImpl(
 ) : PeopleRepository {
     override suspend fun fetchPeopleByName(name: String) =
         service.fetchPeopleByName(name).map { it.toModel() }
+
+    override suspend fun fetchCastCreditsByPersonId(id: Int) =
+        service.fetchCastCreditsByPersonId(id)
 }

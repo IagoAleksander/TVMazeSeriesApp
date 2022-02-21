@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_showDetailsFragment"
             app:destination="@id/showDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_personDetailsFragment"
+            app:destination="@id/personDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -47,5 +50,17 @@
         <argument
             android:name="showName"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/personDetailsFragment"
+        android:name="com.iaz.tvmazeseriesapp.view.persondetails.PersonDetailsFragment"
+        android:label="fragment_person_details"
+        tools:layout="@layout/fragment_person_details" >
+        <argument
+            android:name="person"
+            app:argType="com.iaz.tvmazeseriesapp.repository.model.Person" />
+        <action
+            android:id="@+id/action_personDetailsFragment_to_showDetailsFragment"
+            app:destination="@id/showDetailsFragment" />
     </fragment>
 </navigation>

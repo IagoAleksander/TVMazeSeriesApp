@@ -8,7 +8,13 @@ data class Show(
     override val id: Int,
     override val name: String,
     override val image: Image,
-    val premiered: String?,
+    val schedule: Schedule?,
     val genres: List<String>?,
     val summary: String?,
 ) : GridItem(id, name, image), Parcelable
+
+@Parcelize
+data class Schedule(
+    val time: String?,
+    val days: List<String>?,
+) : Parcelable
