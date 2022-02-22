@@ -1,8 +1,8 @@
 package com.iaz.tvmazeseriesapp.repository
 
-import SharedPreferenceStringSetLiveData
 import android.content.Context
 import android.content.SharedPreferences
+import com.iaz.tvmazeseriesapp.util.SharedPreferenceStringSetLiveData
 
 class Prefs(context: Context) {
     companion object {

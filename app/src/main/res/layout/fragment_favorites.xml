@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/sv_favorites"
         android:layout_width="@dimen/none"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/search_view_height"
         android:background="@color/primary_light"
         android:imeOptions="actionSearch"
         app:iconifiedByDefault="false"
@@ -33,5 +33,20 @@
         app:layout_constraintTop_toBottomOf="@+id/sv_favorites"
         app:spanCount="2"
         tools:listitem="@layout/item_grid" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_empty_state_favorites"
+        android:layout_width="@dimen/none"
+        android:layout_height="@dimen/none"
+        android:layout_margin="@dimen/margin_large"
+        android:gravity="center"
+        android:text="@string/there_are_no_results_to_be_show"
+        android:textColor="@color/accent"
+        android:textSize="@dimen/text_medium"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sv_favorites" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

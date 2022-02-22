@@ -3,6 +3,8 @@ package com.iaz.tvmazeseriesapp.view.home
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
@@ -12,7 +14,7 @@ import androidx.lifecycle.whenCreated
 import androidx.navigation.fragment.findNavController
 import com.iaz.tvmazeseriesapp.R
 import com.iaz.tvmazeseriesapp.databinding.FragmentHomeBinding
-import com.iaz.tvmazeseriesapp.repository.ResultState
+import com.iaz.tvmazeseriesapp.repository.model.GridItem
 import com.iaz.tvmazeseriesapp.repository.model.Person
 import com.iaz.tvmazeseriesapp.repository.model.Show
 import com.iaz.tvmazeseriesapp.util.SearchViewTextListener
@@ -69,6 +71,8 @@ class HomeFragment : Fragment() {
         closeIcon.setOnClickListener {
             binding.svLayout.svHome.setQuery("", false)
             binding.rvHome.adapter = showPaginatedAdapter
+            binding.rvHome.visibility = VISIBLE
+            binding.tvEmptyStateHome.visibility = GONE
             hideSoftKeyboard()
         }
 
@@ -95,7 +99,7 @@ class HomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             whenCreated {
                 homeViewModel.flowShows.collectLatest { pagingData ->
-                    //TODO check empty state
+                    binding.rvHome.visibility = VISIBLE
                     showPaginatedAdapter.submitData(pagingData)
                 }
             }
@@ -114,29 +118,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        homeViewModel.resultStateShows.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                ResultState.Empty -> {
-                    //TODO add empty state
-                }
-                is ResultState.Loaded -> {
-                    binding.rvHome.adapter = gridAdapter
-                    gridAdapter.submitList(result.data)
-                }
-                else -> {}
-            }
+        homeViewModel.shows.observe(viewLifecycleOwner) { result ->
+            checkEmptyStateAndShowData(result)
         }
-        homeViewModel.resultStatePeople.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                ResultState.Empty -> {
-                    //TODO add empty state
-                }
-                is ResultState.Loaded -> {
-                    binding.rvHome.adapter = gridAdapter
-                    gridAdapter.submitList(result.data)
-                }
-                else -> {}
-            }
+        homeViewModel.people.observe(viewLifecycleOwner) { result ->
+            checkEmptyStateAndShowData(result)
         }
     }
 
@@ -145,6 +131,18 @@ class HomeFragment : Fragment() {
             homeViewModel.fetchShows(term)
         } else {
             homeViewModel.fetchPeople(term)
+        }
+    }
+
+    private fun checkEmptyStateAndShowData(shows: List<GridItem>?) {
+        if (shows.isNullOrEmpty()) {
+            binding.rvHome.visibility = GONE
+            binding.tvEmptyStateHome.visibility = VISIBLE
+        } else {
+            binding.rvHome.adapter = gridAdapter
+            gridAdapter.submitList(shows)
+            binding.rvHome.visibility = VISIBLE
+            binding.tvEmptyStateHome.visibility = GONE
         }
     }
 }

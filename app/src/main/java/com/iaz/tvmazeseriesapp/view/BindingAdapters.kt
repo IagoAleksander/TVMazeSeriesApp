@@ -6,20 +6,20 @@ import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
+import com.iaz.tvmazeseriesapp.GlideApp
 import com.iaz.tvmazeseriesapp.R
 
 @BindingAdapter("loadImage")
 fun bindLoadImage(view: AppCompatImageView, url: String?) {
     url?.let {
-        Glide.with(view.context).load(url).placeholder(R.drawable.poster_placeholder).override(SIZE_ORIGINAL).into(view)
+        GlideApp.with(view.context).load(url).placeholder(R.drawable.poster_placeholder).into(view)
     }
 }
 
 @BindingAdapter("loadHorizontalImage")
 fun bindLoadHorizontalImage(view: AppCompatImageView, url: String?) {
     url?.let {
-        Glide.with(view.context).load(url).placeholder(R.drawable.poster_placeholder_horizontal).override(SIZE_ORIGINAL)
-            .into(view)
+        Glide.with(view.context).load(url).placeholder(R.drawable.poster_placeholder_horizontal).into(view)
     }
 }
 
@@ -47,9 +47,9 @@ fun TextView.handleHtmlFormattedString(htmlString: String?) {
 
 @BindingAdapter("handleLoading")
 fun TextView.handleLoading(info: String?) {
-    if (info.isNullOrBlank()) {
-        text = context.getString(R.string.no_information_available)
+    text = if (info.isNullOrBlank()) {
+        context.getString(R.string.no_information_available)
     } else {
-        text = info
+        info
     }
 }

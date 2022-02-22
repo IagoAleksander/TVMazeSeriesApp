@@ -18,7 +18,7 @@ class PersonDetailsFragment : Fragment() {
     private lateinit var binding: FragmentPersonDetailsBinding
     private lateinit var showBasicAdapter: ShowBasicAdapter
 
-    private val personDetailsViewModel: PersonDetailsViewModel by viewModel() {
+    private val personDetailsViewModel: PersonDetailsViewModel by viewModel {
         parametersOf(
             args.person.id
         )

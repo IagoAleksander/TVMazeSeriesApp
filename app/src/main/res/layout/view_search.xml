@@ -8,7 +8,7 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/sv_home"
         android:layout_width="@dimen/none"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/search_view_height"
         android:imeOptions="actionSearch"
         app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"

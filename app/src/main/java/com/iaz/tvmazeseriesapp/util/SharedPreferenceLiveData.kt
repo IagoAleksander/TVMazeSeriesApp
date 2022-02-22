@@ -1,3 +1,5 @@
+package com.iaz.tvmazeseriesapp.util
+
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 

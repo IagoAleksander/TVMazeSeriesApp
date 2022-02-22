@@ -30,7 +30,7 @@ class FavoritesFragment : Fragment() {
     private lateinit var binding: FragmentFavoritesBinding
     private lateinit var gridAdapter: GridAdapter
 
-    private val favoritesViewModel: FavoritesViewModel by viewModel() {
+    private val favoritesViewModel: FavoritesViewModel by viewModel {
         parametersOf(
             prefs?.favoritesPref?.toList()
         )
@@ -87,8 +87,7 @@ class FavoritesFragment : Fragment() {
 
     private fun setupObservers() {
         favoritesViewModel.shows.observe(viewLifecycleOwner) { shows ->
-            //TODO check empty state
-            gridAdapter.submitList(shows)
+            checkEmptyStateAndShowData(shows)
         }
         prefs?.sharedPreferenceStringLiveData?.observe(viewLifecycleOwner) { favoritedShowsSet ->
             favoritesViewModel.fetchFavorites(favoritedShowsSet.toList())
@@ -98,8 +97,18 @@ class FavoritesFragment : Fragment() {
     private fun filterData(term: String) {
         val filteredList = favoritesViewModel.shows.value?.filter {
             it.name.lowercase(Locale.getDefault()).contains(term.lowercase(Locale.getDefault()))
-        }?.sortedBy { it.name }
-        //TODO check empty state
-        gridAdapter.submitList(filteredList ?: listOf())
+        }
+        checkEmptyStateAndShowData(filteredList)
+    }
+
+    private fun checkEmptyStateAndShowData(shows: List<Show>?) {
+        if (shows.isNullOrEmpty()) {
+            binding.rvFavorite.visibility = View.GONE
+            binding.tvEmptyStateFavorites.visibility = View.VISIBLE
+        } else {
+            gridAdapter.submitList(shows.sortedBy { it.name })
+            binding.rvFavorite.visibility = View.VISIBLE
+            binding.tvEmptyStateFavorites.visibility = View.GONE
+        }
     }
 }

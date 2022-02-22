@@ -8,7 +8,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.iaz.tvmazeseriesapp.repository.PeopleRepository
-import com.iaz.tvmazeseriesapp.repository.ResultState
 import com.iaz.tvmazeseriesapp.repository.ShowsRepository
 import com.iaz.tvmazeseriesapp.repository.model.Person
 import com.iaz.tvmazeseriesapp.repository.model.Show
@@ -24,14 +23,14 @@ class HomeViewModel(
     private val dispatcherRequest: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
-    private var mutableResultStateShows = MutableLiveData<ResultState<List<Show>>>()
-    private var mutableResultStatePeople = MutableLiveData<ResultState<List<Person>>>()
+    private var mutableShows = MutableLiveData<List<Show>>()
+    private var mutablePeople = MutableLiveData<List<Person>>()
 
-    val resultStateShows: LiveData<ResultState<List<Show>>>
-        get() = mutableResultStateShows
+    val shows: LiveData<List<Show>>
+        get() = mutableShows
 
-    val resultStatePeople: LiveData<ResultState<List<Person>>>
-        get() = mutableResultStatePeople
+    val people: LiveData<List<Person>>
+        get() = mutablePeople
 
     val flowShows = Pager(
         PagingConfig(PAGE_SIZE_DEFAULT)
@@ -40,34 +39,22 @@ class HomeViewModel(
     }.flow.cachedIn(viewModelScope)
 
     fun fetchShows(name: String) {
-        mutableResultStateShows.postValue(ResultState.Loading)
-
         viewModelScope.launch {
             withContext(dispatcherRequest) {
                 showsRepository.fetchShowsByName(name)
                     .let { result ->
-                        if (result.isEmpty()) {
-                            mutableResultStateShows.postValue(ResultState.Empty)
-                        } else {
-                            mutableResultStateShows.postValue(ResultState.Loaded(result))
-                        }
+                        mutableShows.postValue(result)
                     }
             }
         }
     }
 
     fun fetchPeople(name: String) {
-        mutableResultStateShows.postValue(ResultState.Loading)
-
         viewModelScope.launch {
             withContext(dispatcherRequest) {
                 peopleRepository.fetchPeopleByName(name)
                     .let { result ->
-                        if (result.isEmpty()) {
-                            mutableResultStatePeople.postValue(ResultState.Empty)
-                        } else {
-                            mutableResultStatePeople.postValue(ResultState.Loaded(result))
-                        }
+                        mutablePeople.postValue(result)
                     }
             }
         }

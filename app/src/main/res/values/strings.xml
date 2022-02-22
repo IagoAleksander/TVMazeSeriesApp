@@ -20,4 +20,5 @@
     <string name="remove_from_favorites">Remove from Favorites</string>
     <string name="filter_here">Filter Here</string>
     <string name="search_here">Search Here</string>
+    <string name="there_are_no_results_to_be_show">There are no results to be show!</string>
 </resources>

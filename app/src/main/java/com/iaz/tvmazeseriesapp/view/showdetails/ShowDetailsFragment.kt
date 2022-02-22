@@ -24,7 +24,7 @@ class ShowDetailsFragment : Fragment() {
     private lateinit var episodeAdapter: EpisodeAdapter
     private lateinit var showName: String
 
-    private val showDetailsViewModel: ShowDetailsViewModel by viewModel() {
+    private val showDetailsViewModel: ShowDetailsViewModel by viewModel {
         parametersOf(
             args.id,
             args.show
